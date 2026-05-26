@@ -14,10 +14,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Grant gradlew permission
-        run: chmod +x ./gradlew
-      - name: Run tests
-        run: ./gradlew test
+      - name: Fix gradlew & run tests
+        run: |
+          sed -i 's/\r$//' gradlew
+          chmod +x ./gradlew
+          ./gradlew test
 
   docker:
     needs: test
