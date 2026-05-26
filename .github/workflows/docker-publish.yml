@@ -14,11 +14,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Fix gradlew & run tests
-        run: |
-          sed -i 's/\r$//' gradlew
-          chmod +x ./gradlew
-          ./gradlew test
+      - uses: gradle/actions/setup-gradle@v3
+      - name: Run tests
+        run: gradle test --no-daemon
 
   docker:
     needs: test
